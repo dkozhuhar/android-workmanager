@@ -19,6 +19,7 @@ package com.example.background
 import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
+import androidx.work.WorkManager
 
 
 class BlurViewModel(application: Application) : AndroidViewModel(application) {
@@ -44,4 +45,7 @@ class BlurViewModel(application: Application) : AndroidViewModel(application) {
     internal fun setOutputUri(outputImageUri: String?) {
         outputUri = uriOrNull(outputImageUri)
     }
+
+    private val blurWorkManager = WorkManager.getInstance(application)
+
 }
