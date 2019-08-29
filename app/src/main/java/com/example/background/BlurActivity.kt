@@ -58,6 +58,7 @@ class BlurActivity : AppCompatActivity() {
         imageView = findViewById(R.id.image_view)
         progressBar = findViewById(R.id.progress_bar)
         goButton = findViewById(R.id.go_button)
+        goButton.setOnClickListener { viewModel.blur(blurLevel) }
         outputButton = findViewById(R.id.see_file_button)
         cancelButton = findViewById(R.id.cancel_button)
         radioGroup = findViewById(R.id.radio_blur_group)
