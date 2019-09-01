@@ -51,11 +51,11 @@ class BlurViewModel(application: Application) : AndroidViewModel(application) {
 
     private val blurWorkManager = WorkManager.getInstance(application)
 
-    private val inputData = Data.Builder().putString(KEY_IMAGE_URI,imageUri.toString()).build()
 
-    private val blurWorkerRequest = OneTimeWorkRequestBuilder<BlurWorker>().setInputData(inputData).build()
 
     fun blur(blurLevel: Int)  {
+        val inputData = Data.Builder().putString(KEY_IMAGE_URI,imageUri.toString()).build()
+        val blurWorkerRequest = OneTimeWorkRequestBuilder<BlurWorker>().setInputData(inputData).build()
         blurWorkManager.enqueue(blurWorkerRequest)
     }
 
