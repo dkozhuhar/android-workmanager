@@ -17,6 +17,7 @@
 package com.example.background
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -29,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import timber.log.Timber
 
 import java.util.Arrays
 
@@ -52,6 +54,7 @@ class SelectImageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.plant(Timber.DebugTree())
         setContentView(R.layout.activity_select)
 
         selectImageButton = findViewById(R.id.selectImage)
@@ -131,6 +134,7 @@ class SelectImageActivity : AppCompatActivity() {
     }
 
     /** Image Selection  */
+    @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
@@ -30,6 +31,7 @@ class SaveImageToFileWorker(val context: Context, blurWorkerParams: WorkerParame
             val resourceUri = inputData.getString(KEY_IMAGE_URI)
             val bitmap = BitmapFactory.decodeStream(
                     resolver.openInputStream(Uri.parse(resourceUri)))
+
             val imageUrl = MediaStore.Images.Media.insertImage(
                     resolver, bitmap, Title, dateFormatter.format(Date()))
             if (!imageUrl.isNullOrEmpty()) {

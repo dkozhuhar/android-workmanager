@@ -59,12 +59,12 @@ class BlurViewModel(application: Application) : AndroidViewModel(application) {
         val inputData = Data.Builder().putString(KEY_IMAGE_URI,imageUri.toString()).build()
         val cleanupRequest = OneTimeWorkRequestBuilder<CleanupWorker>().build()
         val saveRequest = OneTimeWorkRequestBuilder<SaveImageToFileWorker>().build()
-        val continuation = blurWorkManager.beginWith(cleanupRequest)
+        var continuation = blurWorkManager.beginWith(cleanupRequest)
         for (i in 1..blurLevel) {
             if (i == 1) {
-                continuation.then(OneTimeWorkRequestBuilder<BlurWorker>().setInputData(inputData).build())
+                continuation = continuation.then(OneTimeWorkRequestBuilder<BlurWorker>().setInputData(inputData).build())
             } else
-                continuation.then(OneTimeWorkRequestBuilder<BlurWorker>().build())
+                continuation = continuation.then(OneTimeWorkRequestBuilder<BlurWorker>().build())
         }
         continuation.then(saveRequest)
                 .enqueue()
